@@ -1,48 +1,66 @@
-import React, { useState,useRef } from 'react'
+import React, { useState } from 'react'
 import "./register.scss"
+import axios from "axios";
+import { Link, useNavigate } from 'react-router-dom';
+import {toast} from "react-toastify"
 
 export default function Register() {
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
-    const emailRef = useRef();
-    const passwordRef = useRef();
+    const [username,setUsername] = useState("");
+    const navigate = useNavigate();
 
-    const handleStart = ()=>{
-        setEmail(emailRef.current.value);
-    }
-
-    const handleFinish = () =>{
-        setPassword(passwordRef.current.value)
+    console.log(email,username,password);
+    const handleFinish = async (e) =>{
+        e.preventDefault();
+            try{
+                const res = await axios.post("http://localhost:8800/api/auth/register", {email,password,username})
+                
+                if(res.data.error){
+                    toast(res.data.error);
+                }
+    
+                else{
+                    navigate("/login")
+                }
+            }
+            catch(err){
+                console.log(err);
+            }      
+        
     }
   return (
     <div className='register'>
         <div className="top">
             <div className="wrapper">
-            <img 
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/2560px-Netflix_2015_logo.svg.png"
-            alt="" 
-            className="logo" />
-            <button className="loginButton">Sign In</button>
+                <div className="logo">
+                    ScreenRush
+                </div>                                    
+            
         </div>
             </div>
             
         <div className="container">
-            <h1>Lorem ipsum dolor sit amet.</h1>
-            <h2>Lorem ipsum dolor sit amet.</h2>
-            <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis eos iste et eveniet ratione delectus animi minima neque ducimus cum.
-            </p>
-            {!email ? (
-            <div className="input">
-                <input type="email" placeholder='Email Address' ref={emailRef}/>
-                <button className="registerButton" onClick={handleStart}>Get Started</button>
-            </div>
-            ) : (
-            <form className="input">
-                <input type="password" placeholder='Password' ref={passwordRef}/>
+            <h1>"Unleash the world of entertainment at your fingertips</h1>
+            
+            <form>
+
+                <input type="email" name="email" id="email" placeholder='Email Address' onChange={(e)=>setEmail(e.target.value)}/>
+                <input type="username" placeholder='username' onChange={(e)=>setUsername(e.target.value)}/>
+                <input type="password" placeholder='Password' onChange={(e)=>setPassword(e.target.value)}/>
                 <button className="registerButton" onClick={handleFinish}>Start</button>
             </form>
-            )}
+
+            <div className='signindiv'>
+                <span>
+                    Already have an account ? 
+                </span>
+                <Link to={"/login"}>
+                    <button className="signinButton">
+                        Sign In
+                    </button>
+                </Link>  
+            </div>
             
         </div>
     </div>

@@ -6,7 +6,7 @@
         rgba(0, 0, 0, 0) 0%,
         rgba(0, 0, 0, 1) 100%
       ),
-      url("https://blog.vpncity.com/wp-content/uploads/2020/01/xx.png");
+      url("https://as2.ftcdn.net/v2/jpg/05/08/46/95/1000_F_508469574_2EURzhhkfB7DeLZ0SwYLtiPn9ILTOBof.jpg");
     background-size: cover;
     position: relative;
   
@@ -17,8 +17,11 @@
         align-items: center;
         justify-content: space-between;
   
-        .logo {
-          height: 40px;
+        .logo{
+          font-size: 35px;
+          color: red;
+          font-weight: 1000;
+          margin-right: 30px;
         }
   
         .loginButton {
@@ -48,6 +51,7 @@
   
       h1 {
         font-size: 50px;
+        margin-bottom: 20px;
       }
   
       h2 {
@@ -57,33 +61,55 @@
       p {
         font-size: 20px;
       }
-  
-      .input {
-        width: 50%;
-        background-color: white;
+
+      form{
         display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-top: 20px;
-        height: 50px;
-        border-radius: 5px;
+        flex-direction: column;
+        height: 25%;
+        width: 30%;
+        
+      }
   
         input{
             flex: 9;
             height: 100%;
             border: none;
             padding: 0 10px;
+            margin-bottom: 20px;
+            background-color: rgb(204, 202, 202);
+            color : white;
         }
-  
-        .registerButton{
-            flex: 3;
-            height: 100%;
-            background-color: red;
-            border: none;
-            color: white;
-            font-size: 22px;
-            cursor: pointer;
-        }
-      }
+
+
+      .registerButton{
+        flex: 3;
+        height: 100%;
+        background-color: red;
+        border: none;
+        color: white;
+        font-size: 22px;
+        cursor: pointer;
     }
+    }
+  }
+
+  .signindiv{
+    margin-top: 30px;
+
+    
+    span{
+      font-size: 20px;
+      font-weight: 500;
+    }
+  }
+
+  .signinButton{
+    margin-left: 20px;
+    cursor: pointer;
+    font-size: 20px;
+    width: 120px;
+    height: 40px;
+    background-color: red;
+    color: white;
+    outline: none;
   }

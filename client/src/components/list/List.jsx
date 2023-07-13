@@ -6,6 +6,7 @@ import { ArrowBackIosOutlined , ArrowForwardIosOutlined} from "@mui/icons-materi
   
   export default function List({list}) {
     const [slideNumber, setSlideNumber] = useState(0);
+    const clickLimit = window.innerWidth / 230;
   
     const listRef = useRef();
   
@@ -15,7 +16,7 @@ import { ArrowBackIosOutlined , ArrowForwardIosOutlined} from "@mui/icons-materi
         setSlideNumber(slideNumber - 1);
         listRef.current.style.transform = `translateX(${230 + distance}px)`;
       }
-      if (direction === "right" && slideNumber < 4) {
+      if (direction === "right" && slideNumber < 10-clickLimit) {
         setSlideNumber(slideNumber + 1);
         listRef.current.style.transform = `translateX(${-230 + distance}px)`;
       }
@@ -31,7 +32,7 @@ import { ArrowBackIosOutlined , ArrowForwardIosOutlined} from "@mui/icons-materi
           />
           <div className="container" ref={listRef}>
             {list.content.map((item,i)=>(
-              <ListItem index={i} item={item} />
+              <ListItem index={i} item={item} key={item._id} />
             ))}
           </div>
           <ArrowForwardIosOutlined

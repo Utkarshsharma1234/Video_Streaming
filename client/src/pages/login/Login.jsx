@@ -1,27 +1,43 @@
-import React, { useState,useRef } from 'react'
+import React, { useState,useContext } from 'react'
 import "./login.scss"
+import { LoginCall } from '../../context/authContext/apiCalls';
+import { AuthContext } from '../../context/authContext/AuthContext';
+import {Link} from "react-router-dom"
 
 export default function Login() {
-    
+    const [email,setEmail] = useState("");
+    const [password,setPassword] = useState("");
+
+    const {dispatch} = useContext(AuthContext);
+    const handleLogin =(e) =>{
+        e.preventDefault();
+        LoginCall({email,password}, dispatch);
+    }
+
   return (
     <div className='login'>
         <div className="top">
             <div className="wrapper">
-                <img 
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/2560px-Netflix_2015_logo.svg.png"
-                alt="" 
-                className="logo" />
+                <div className="logo">
+                    ScreenRush
+                </div>
             </div>
         </div>
             
         <div className="container">
             <form action="">
                 <h1>Sign In</h1>
-                <input type="email" placeholder='Email Address' name="" id="" />
-                <input type="password" placeholder="Password" name="" id="" />
-                <button className="loginButton">Sign In</button>
-                <span>
-                    New To Netflix ? <b>Sign Up Now.</b>
+                <input type="email" placeholder='Email Address' onChange={(e)=>setEmail(e.target.value)}/>
+                <input type="password" placeholder="Password" onChange={(e)=>setPassword(e.target.value)}/>
+                <button className="loginButton" onClick={handleLogin}>Sign In</button>
+                <span className='newToNetflix'>
+                    New To Netflix ? 
+                    <Link to={"/register"}>
+                        <button className="signupButton">
+                            Sign Up 
+                        </button>
+                    </Link>
+                    
                 </span>
                 <small>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda veniam enim tempore harum consequuntur hic accusamus pariatur facilis, rem sequi!
